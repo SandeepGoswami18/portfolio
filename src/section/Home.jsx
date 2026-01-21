@@ -2,7 +2,6 @@ import React, { useMemo, useEffect, useState } from "react";
 import ParticlesBackground from "../components/ParticleBackground";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
-import { SiLeetcode } from "react-icons/si";
 import avator from "../assets/avator.png";
 
 const socials = [
@@ -13,11 +12,6 @@ const socials = [
     href: "https://www.linkedin.com/in/sandeep-kumar-bharti-72a264320/",
   },
   { Icon: FaGithub, label: "Github", href: "https://github.com/SandeepGoswami18" },
-  {
-    Icon: SiLeetcode,
-    label: "LeetCode",
-    href: "https://leetcode.com/SandeepGoswami18/",
-  },
 ];
 
 const glowVariants = {
