@@ -21,6 +21,7 @@ export default function Skills() {
     { icon: <SiCplusplus />, name: "C++" },
     { icon: <SiPython />, name: "Python" },
   ];
+
   const repeated = [...skills, ...skills];
 
   const [dir, setDir] = useState(-1);
@@ -103,18 +104,18 @@ export default function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="h-1/2 w-full pb-8 flex flex-col items-center justify-center relative bg-black text-white overflow-hidden"
+      className="min-h-[60vh] w-full py-20 flex flex-col items-center justify-center relative bg-black text-white overflow-hidden pt-24"
     >
-      {/* 🔮 BACKGROUND BLURS */}
+      {/* ✅ GOLD BACKGROUND GLOWS */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-0 w-[300px] h-[300px] rounded-full bg-gradient-to-r from-[#302b63] via-[#0b0bff] to-[#1c0d82] opacity-20 blur-[120px] animate-pulse"></div>
+        <div className="absolute top-1/4 left-0 w-[320px] h-[320px] rounded-full bg-gradient-to-r from-[#ffb000] via-[#ffd36a] to-[#fff1c1] opacity-20 blur-[130px] animate-pulse"></div>
 
-        <div className="absolute bottom-1/4 right-0 w-[300px] h-[300px] rounded-full bg-gradient-to-r from-[#302b63] via-[#0b0bff] to-[#1c0d82] opacity-20 blur-[120px] animate-pulse delay-500"></div>
+        <div className="absolute bottom-1/4 right-0 w-[320px] h-[320px] rounded-full bg-gradient-to-r from-[#fff1c1] via-[#ffd36a] to-[#ffb000] opacity-20 blur-[130px] animate-pulse delay-500"></div>
       </div>
 
-      {/* 🧠 HEADING */}
+      {/* ✅ HEADING */}
       <motion.h2
-        className="text-4xl mt-5 sm:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#1c0d82] via-[#0b0bff] to-[#302b63] z-10"
+        className="text-4xl sm:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-[#ffb000] via-[#ffd36a] to-[#fff1c1] z-10 drop-shadow-[0_0_12px_rgba(255,176,0,0.25)]"
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
@@ -123,9 +124,9 @@ export default function Skills() {
         My Skills
       </motion.h2>
 
-      {/* 📝 SUBTITLE */}
+      {/* ✅ SUBTITLE */}
       <motion.p
-        className="mt-2 mb-10 text-gray-300 z-10"
+        className="mt-2 mb-10 text-gray-300 z-10 text-sm sm:text-base"
         initial={{ opacity: 0, y: -10 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
@@ -134,10 +135,11 @@ export default function Skills() {
         Modern Applications | Modern Technologies
       </motion.p>
 
+      {/* ✅ Marquee */}
       <div className="relative w-full overflow-hidden">
         <motion.div
           ref={trackRef}
-          className="flex gap-10 text-6xl text-[#1cd8d2]"
+          className="flex gap-10 text-6xl text-[#ffb000]"
           style={{ x, whiteSpace: "nowrap", willChange: "transform" }}
         >
           {repeated.map((s, i) => (
@@ -147,14 +149,26 @@ export default function Skills() {
               aria-label={s.name}
               title={s.name}
             >
-              <span className="hover:scale-125 transition-transform duration-300">
+              {/* ✅ ICON */}
+              <span
+                className="
+                  hover:scale-125 transition-transform duration-300
+                  drop-shadow-[0_0_10px_rgba(255,176,0,0.25)]
+                  hover:drop-shadow-[0_0_18px_rgba(255,176,0,0.55)]
+                "
+              >
                 {s.icon}
               </span>
 
-              <p className="text-sm">{s.name}</p>
+              {/* ✅ TEXT */}
+              <p className="text-sm text-white/80">{s.name}</p>
             </div>
           ))}
         </motion.div>
+
+        {/* ✅ Fade edges (premium look) */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-black to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-black to-transparent" />
       </div>
     </section>
   );

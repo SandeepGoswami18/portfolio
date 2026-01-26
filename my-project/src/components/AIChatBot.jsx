@@ -11,8 +11,8 @@ export default function AIChatBot() {
   const [ttsOn, setTtsOn] = useState(false);
   const [dsaMode, setDsaMode] = useState(true);
 
-  const [listening, setListening] = useState(false); // ✅ mic animation
-  const [autoSendVoice, setAutoSendVoice] = useState(true); // ✅ voice -> auto send
+  const [listening, setListening] = useState(false);
+  const [autoSendVoice, setAutoSendVoice] = useState(true);
 
   const listRef = useRef(null);
 
@@ -126,7 +126,6 @@ export default function AIChatBot() {
 • 1 concept + 1 question
 
 Type: "hashing concept" / "prefix sum explain" / "binary search explain"`,
-
       hashing: `🧠 HASHING CONCEPT (Real + Simple) ✅
 
 ✨ Hashing = fast store + fast search using KEY.
@@ -156,7 +155,6 @@ Solve:
 🎯 Trick:
 Words like "count", "duplicate", "seen before", "frequency"
 ➡️ 90% hashing ✅`,
-
       prefixSum: `🧠 PREFIX SUM (Simple + Powerful) ✅
 
 Prefix Sum = left se cumulative sum store.
@@ -171,7 +169,6 @@ pref: [2,5,10]
 
 🎯 Trigger words:
 "subarray sum", "range sum", "sum between i-j"`,
-
       binarySearch: `🧠 BINARY SEARCH (Fast Searching) ✅
 
 ✅ Works on sorted data / monotonic answer
@@ -179,7 +176,6 @@ Har step me half cut = O(log n)
 
 ✅ Trigger words:
 "sorted", "minimum possible", "maximum possible", "kth"`,
-
       followup: `✅ Next kya samjhau?
 • Hashing collision?
 • Frequency map?
@@ -221,7 +217,7 @@ Type: "collision explain" / "frequency map explain"`,
     ];
   }, [PROFILE]);
 
-  // ✅ Intent detection (Strong)
+  // ✅ Intent detection
   const detectIntent = (text) => {
     const t = text.toLowerCase().trim();
 
@@ -229,11 +225,8 @@ Type: "collision explain" / "frequency map explain"`,
       return "DSA_ROADMAP";
 
     if (t.includes("hash") || t.includes("hashing")) return "HASHING";
-
     if (t.includes("prefix") || t.includes("subarray")) return "PREFIX_SUM";
-
     if (t.includes("binary") || t.includes("bs")) return "BINARY_SEARCH";
-
     if (t.includes("collision")) return "HASHING";
     if (t.includes("frequency")) return "HASHING";
 
@@ -252,7 +245,6 @@ Type: "collision explain" / "frequency map explain"`,
       if (intent === "BINARY_SEARCH") return DSA_KB.binarySearch;
     }
 
-    // portfolio score matching
     let best = { score: 0, reply: null };
     for (const item of knowledgeBase) {
       let score = 0;
@@ -348,7 +340,6 @@ Type: "collision explain" / "frequency map explain"`,
       setInput(transcript);
       setListening(false);
 
-      // ✅ Auto send voice text (optional)
       if (autoSendVoice) {
         setTimeout(() => handleSend(transcript), 200);
       }
@@ -359,9 +350,7 @@ Type: "collision explain" / "frequency map explain"`,
       setListening(false);
     };
 
-    rec.onend = () => {
-      setListening(false);
-    };
+    rec.onend = () => setListening(false);
 
     rec.start();
   };
@@ -373,14 +362,17 @@ Type: "collision explain" / "frequency map explain"`,
     return messages.filter((m) => m.text.toLowerCase().includes(s));
   }, [messages, search]);
 
-  // ✅ highlight search matches
+  // ✅ highlight search matches (Gold)
   const highlight = (text) => {
     if (!search.trim()) return text;
     const s = search.trim();
     const parts = text.split(new RegExp(`(${s})`, "gi"));
     return parts.map((p, i) =>
       p.toLowerCase() === s.toLowerCase() ? (
-        <mark key={i} className="bg-cyan-400/30 text-cyan-200 px-1 rounded">
+        <mark
+          key={i}
+          className="bg-yellow-400/25 text-yellow-200 px-1 rounded"
+        >
           {p}
         </mark>
       ) : (
@@ -391,23 +383,37 @@ Type: "collision explain" / "frequency map explain"`,
 
   return (
     <>
-      {/* Floating Button */}
+      {/* ✅ Floating Button (Gold Theme) */}
       <button
         onClick={() => {
           setOpen(!open);
           setMinimize(false);
         }}
-        className="fixed bottom-6 right-6 z-[9999] flex items-center justify-center w-14 h-14 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 shadow-lg hover:scale-105 transition"
+        className="
+          fixed bottom-6 right-6 z-[9999]
+          flex items-center justify-center w-14 h-14 rounded-full
+          bg-gradient-to-r from-[#ffb000] via-[#ff9f1a] to-[#ffd36a]
+          shadow-[0_0_25px_rgba(255,176,0,0.45)]
+          hover:shadow-[0_0_45px_rgba(255,176,0,0.85)]
+          hover:scale-105 transition
+        "
         title="Open AI Assistant"
       >
         🤖
       </button>
 
-      {/* Chat Box */}
+      {/* ✅ Chat Box */}
       {open && (
-        <div className="fixed bottom-24 right-6 z-[9999] w-80 bg-black/80 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl overflow-hidden">
-          {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+        <div
+          className="
+            fixed bottom-24 right-6 z-[9999] w-80
+            bg-black/80 backdrop-blur-xl
+            border border-yellow-400/20
+            rounded-2xl shadow-xl overflow-hidden
+          "
+        >
+          {/* ✅ Header */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-yellow-400/15">
             <div>
               <h3 className="text-white font-semibold">AI Assistant</h3>
               <p className="text-[11px] text-white/50">
@@ -418,9 +424,9 @@ Type: "collision explain" / "frequency map explain"`,
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setDsaMode(!dsaMode)}
-                className={`text-xs px-2 py-1 rounded-lg border ${
+                className={`text-xs px-2 py-1 rounded-lg border transition ${
                   dsaMode
-                    ? "border-cyan-400/60 text-cyan-200"
+                    ? "border-yellow-400/50 text-yellow-200 bg-yellow-400/10"
                     : "border-white/10 text-white/60"
                 }`}
                 title="DSA Mode"
@@ -446,7 +452,7 @@ Type: "collision explain" / "frequency map explain"`,
             </div>
           </div>
 
-          {/* Minimized */}
+          {/* ✅ Minimized */}
           {minimize ? (
             <div className="p-3">
               <p className="text-white/70 text-sm">
@@ -467,13 +473,13 @@ Type: "collision explain" / "frequency map explain"`,
             </div>
           ) : (
             <>
-              {/* Search + Actions */}
-              <div className="p-3 border-b border-white/10 space-y-2">
+              {/* ✅ Search + Actions */}
+              <div className="p-3 border-b border-yellow-400/15 space-y-2">
                 <input
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search in chat..."
-                  className="w-full px-3 py-2 rounded-xl bg-white/10 text-white outline-none text-sm"
+                  className="w-full px-3 py-2 rounded-xl bg-white/10 text-white outline-none text-sm border border-yellow-400/10 focus:border-yellow-400/30"
                 />
 
                 <div className="flex items-center justify-between gap-2">
@@ -486,9 +492,9 @@ Type: "collision explain" / "frequency map explain"`,
 
                   <button
                     onClick={() => setAutoSendVoice(!autoSendVoice)}
-                    className={`text-xs px-3 py-2 rounded-xl border ${
+                    className={`text-xs px-3 py-2 rounded-xl border transition ${
                       autoSendVoice
-                        ? "border-cyan-400/50 text-cyan-200"
+                        ? "border-yellow-400/40 text-yellow-200 bg-yellow-400/10"
                         : "border-white/10 text-white/60"
                     }`}
                     title="Auto send voice"
@@ -498,9 +504,9 @@ Type: "collision explain" / "frequency map explain"`,
 
                   <button
                     onClick={() => setTtsOn(!ttsOn)}
-                    className={`text-xs px-3 py-2 rounded-xl border ${
+                    className={`text-xs px-3 py-2 rounded-xl border transition ${
                       ttsOn
-                        ? "border-cyan-400/50 text-cyan-200"
+                        ? "border-yellow-400/40 text-yellow-200 bg-yellow-400/10"
                         : "border-white/10 text-white/60"
                     }`}
                     title="Text-to-Speech"
@@ -510,36 +516,37 @@ Type: "collision explain" / "frequency map explain"`,
                 </div>
               </div>
 
-              {/* Chips */}
-              <div className="px-3 py-2 flex flex-wrap gap-2 border-b border-white/10">
+              {/* ✅ Chips */}
+              <div className="px-3 py-2 flex flex-wrap gap-2 border-b border-yellow-400/15">
                 {chips.map((c) => (
                   <button
                     key={c}
                     onClick={() => handleChip(c)}
-                    className="text-xs px-3 py-1 rounded-full bg-gradient-to-r from-cyan-400/20 to-purple-500/20 border border-white/10 text-white/80 hover:scale-[1.02] transition"
+                    className="
+                      text-xs px-3 py-1 rounded-full
+                      bg-gradient-to-r from-yellow-400/10 to-orange-400/10
+                      border border-yellow-400/15
+                      text-white/85 hover:scale-[1.02] transition
+                    "
                   >
                     {c}
                   </button>
                 ))}
               </div>
 
-              {/* Messages */}
-              <div
-                ref={listRef}
-                className="h-64 overflow-y-auto p-3 space-y-2"
-              >
+              {/* ✅ Messages */}
+              <div ref={listRef} className="h-64 overflow-y-auto p-3 space-y-2">
                 {filteredMessages.map((m, i) => (
                   <div key={i} className="space-y-1">
                     <div
                       className={`group relative max-w-[88%] px-3 py-2 rounded-xl text-sm whitespace-pre-line ${
                         m.from === "user"
-                          ? "ml-auto bg-cyan-500 text-black"
+                          ? "ml-auto bg-gradient-to-r from-[#ffb000] via-[#ff9f1a] to-[#ffd36a] text-black"
                           : "mr-auto bg-white/10 text-white"
                       }`}
                     >
                       {highlight(m.text)}
 
-                      {/* Copy button for bot */}
                       {m.from === "bot" && (
                         <button
                           onClick={() => copyText(m.text)}
@@ -563,38 +570,37 @@ Type: "collision explain" / "frequency map explain"`,
                   </div>
                 ))}
 
-                {/* Typing indicator */}
+                {/* ✅ Typing indicator */}
                 {isTyping && (
                   <div className="mr-auto bg-white/10 text-white max-w-[70%] px-3 py-2 rounded-xl text-sm">
                     <span className="inline-flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-white/50 animate-bounce"></span>
-                      <span className="w-2 h-2 rounded-full bg-white/50 animate-bounce [animation-delay:120ms]"></span>
-                      <span className="w-2 h-2 rounded-full bg-white/50 animate-bounce [animation-delay:240ms]"></span>
+                      <span className="w-2 h-2 rounded-full bg-yellow-300/70 animate-bounce"></span>
+                      <span className="w-2 h-2 rounded-full bg-yellow-300/70 animate-bounce [animation-delay:120ms]"></span>
+                      <span className="w-2 h-2 rounded-full bg-yellow-300/70 animate-bounce [animation-delay:240ms]"></span>
                       <span className="text-white/70">AI is typing...</span>
                     </span>
                   </div>
                 )}
               </div>
 
-              {/* ✅ Input (ChatGPT style: Input -> Mic -> Send) */}
-              <div className="p-3 border-t border-white/10 flex gap-2 items-center">
+              {/* ✅ Input */}
+              <div className="p-3 border-t border-yellow-400/15 flex gap-2 items-center">
                 <input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Type here..."
-                  className="flex-1 px-3 py-2 rounded-xl bg-white/10 text-white outline-none text-sm"
+                  className="flex-1 px-3 py-2 rounded-xl bg-white/10 text-white outline-none text-sm border border-yellow-400/10 focus:border-yellow-400/30"
                   onKeyDown={(e) => e.key === "Enter" && handleSend()}
                 />
 
-                {/* Mic button with glow while listening */}
+                {/* ✅ Mic */}
                 <button
                   onClick={startVoice}
-                  className={`w-10 h-10 flex items-center justify-center rounded-full border transition
-                    ${
-                      listening
-                        ? "bg-cyan-400/20 border-cyan-400/60 text-cyan-200 animate-pulse shadow-[0_0_25px_rgba(34,211,238,0.35)]"
-                        : "bg-white/10 border-white/10 text-white/80 hover:bg-white/20"
-                    }`}
+                  className={`w-10 h-10 flex items-center justify-center rounded-full border transition ${
+                    listening
+                      ? "bg-yellow-400/15 border-yellow-400/60 text-yellow-200 animate-pulse shadow-[0_0_25px_rgba(255,176,0,0.35)]"
+                      : "bg-white/10 border-white/10 text-white/80 hover:bg-white/20"
+                  }`}
                   title={listening ? "Listening..." : "Voice Input"}
                 >
                   <svg
@@ -615,9 +621,16 @@ Type: "collision explain" / "frequency map explain"`,
                   </svg>
                 </button>
 
+                {/* ✅ Send */}
                 <button
                   onClick={() => handleSend()}
-                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-400 to-purple-500 text-black font-semibold"
+                  className="
+                    px-4 py-2 rounded-xl text-black font-semibold
+                    bg-gradient-to-r from-[#ffb000] via-[#ff9f1a] to-[#ffd36a]
+                    shadow-[0_0_18px_rgba(255,176,0,0.35)]
+                    hover:shadow-[0_0_30px_rgba(255,176,0,0.7)]
+                    transition
+                  "
                 >
                   Send
                 </button>

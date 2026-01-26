@@ -1,19 +1,9 @@
-// Importing React's useState hook for managing component state
 import { useState } from "react";
-
-// Importing motion component from Framer Motion for animations
 import { motion } from "framer-motion";
-
-// Importing EmailJS SDK
 import emailjs from "@emailjs/browser";
-
-// Importing Particles Background (same as Home component)
 import ParticlesBackground from "../components/ParticleBackground.jsx";
-
-// Importing the contact image asset
 import Astra from "../assets/Astra.png";
 
-// Reading EmailJS credentials from environment variables (Vite)
 const SERVICE_ID = import.meta.env.VITE_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID;
 const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
@@ -48,7 +38,8 @@ export default function Contact() {
       (f) => !formData[f].trim() && (newErrors[f] = "Fill this field")
     );
 
-    if (formData.service !== "other" && !formData.budget.trim())
+    // ✅ budget only when service selected
+    if (formData.service && formData.service !== "Others" && !formData.budget.trim())
       newErrors.budget = "Fill this field";
 
     setErrors(newErrors);
@@ -75,7 +66,13 @@ export default function Contact() {
       );
 
       setStatus("success");
-      setFormData({name: "",email: "",service: "",budget: "",idea: ""});
+      setFormData({
+        name: "",
+        email: "",
+        service: "",
+        budget: "",
+        idea: "",
+      });
     } catch (err) {
       console.error("EmailJS Error:", err);
       setStatus("error");
@@ -84,15 +81,21 @@ export default function Contact() {
 
   return (
     <section
-      id="contact" className="w-full min-h-screen relative bg-black overflow-hidden text-white py-20 px-6 md:px-20 flex flex-col md:flex-row items-center gap-10">
-      {/* Particles Background */}
+      id="contact"
+      className="w-full min-h-screen relative bg-black overflow-hidden text-white py-20 px-6 md:px-20 flex flex-col md:flex-row items-center gap-10 pt-24"
+    >
+      {/* ✅ Particles */}
       <ParticlesBackground />
 
-  
+      {/* ✅ GOLD BLOBS */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-24 -left-24 w-[420px] h-[420px] rounded-full bg-gradient-to-r from-[#ffb000] via-[#ffd36a] to-[#fff1c1] opacity-15 blur-[150px] animate-pulse"></div>
+        <div className="absolute bottom-0 -right-24 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-[#fff1c1] via-[#ffd36a] to-[#ffb000] opacity-15 blur-[170px] animate-pulse delay-500"></div>
+      </div>
 
-      {/* Contact Section Content */}
+      {/* ✅ Contact Content */}
       <div className="relative z-10 w-full flex flex-col md:flex-row items-center gap-10">
-        {/* Left Animated Image Section */}
+        {/* ✅ Left Image */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -102,23 +105,26 @@ export default function Contact() {
           <motion.img
             src={Astra}
             alt="Contact"
-            className="w-72 md:w-140 rounded-2xl shadow-lg object-cover"
+            className="w-72 md:w-[420px] rounded-2xl shadow-[0_0_30px_rgba(255,176,0,0.15)] object-cover border border-yellow-400/20"
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           />
         </motion.div>
 
-        {/* Right Side Contact Form */}
+        {/* ✅ Right Form */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-full md:w-1/2 bg-white/5 p-8 rounded-2xl shadow-lg border border-white/10"
+          className="w-full md:w-1/2 bg-black/65 backdrop-blur-xl p-8 rounded-2xl shadow-lg border border-yellow-400/20"
         >
-          <h2 className="text-3xl font-bold mb-6">Let’s Work Together</h2>
+          {/* ✅ Gold Heading */}
+          <h2 className="text-3xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#ffb000] via-[#ffd36a] to-[#fff1c1]">
+            Let’s Work Together
+          </h2>
 
           <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-            {/* Name field */}
+            {/* ✅ Name */}
             <div className="flex flex-col">
               <label className="mb-1">
                 Name <span className="text-red-500">*</span>
@@ -130,15 +136,13 @@ export default function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 className={`p-3 rounded-md bg-white/10 border ${
-                  errors.name ? "border-red-500" : "border-gray-500"
-                } text-white focus:outline-none focus:border-blue-500`}
+                  errors.name ? "border-red-500" : "border-yellow-400/20"
+                } text-white focus:outline-none focus:border-yellow-400/60`}
               />
-              {errors.name && (
-                <p className="text-red-500 text-xs">{errors.name}</p>
-              )}
+              {errors.name && <p className="text-red-500 text-xs">{errors.name}</p>}
             </div>
 
-            {/* Email field */}
+            {/* ✅ Email */}
             <div className="flex flex-col">
               <label className="mb-1">
                 Email <span className="text-red-500">*</span>
@@ -150,15 +154,15 @@ export default function Contact() {
                 value={formData.email}
                 onChange={handleChange}
                 className={`p-3 rounded-md bg-white/10 border ${
-                  errors.email ? "border-red-500" : "border-gray-500"
-                } text-white focus:outline-none focus:border-blue-500`}
+                  errors.email ? "border-red-500" : "border-yellow-400/20"
+                } text-white focus:outline-none focus:border-yellow-400/60`}
               />
               {errors.email && (
                 <p className="text-red-500 text-xs">{errors.email}</p>
               )}
             </div>
 
-            {/* Service dropdown */}
+            {/* ✅ Service */}
             <div className="flex flex-col">
               <label className="mb-1">
                 Service Needed <span className="text-red-500">*</span>
@@ -169,10 +173,10 @@ export default function Contact() {
                 value={formData.service}
                 onChange={handleChange}
                 className={`p-3 rounded-md bg-white/10 border ${
-                  errors.service ? "border-red-500" : "border-gray-500"
-                } focus:outline-none focus:border-blue-500`}
+                  errors.service ? "border-red-500" : "border-yellow-400/20"
+                } text-white focus:outline-none focus:border-yellow-400/60`}
               >
-                <option value="" disabled>
+                <option value="" disabled className="text-black">
                   Something in mind?
                 </option>
                 <option value="Web Development" className="text-black">
@@ -191,8 +195,8 @@ export default function Contact() {
               )}
             </div>
 
-            {/* Budget field */}
-            {formData.service && formData.service !== "other" && (
+            {/* ✅ Budget */}
+            {formData.service && formData.service !== "Others" && (
               <div className="flex flex-col">
                 <label className="mb-1">
                   Budget <span className="text-red-500">*</span>
@@ -205,8 +209,8 @@ export default function Contact() {
                   value={formData.budget}
                   onChange={handleChange}
                   className={`p-3 rounded-md bg-white/10 border ${
-                    errors.budget ? "border-red-500" : "border-gray-500"
-                  } text-white focus:outline-none focus:border-blue-500`}
+                    errors.budget ? "border-red-500" : "border-yellow-400/20"
+                  } text-white focus:outline-none focus:border-yellow-400/60`}
                 />
 
                 {errors.budget && (
@@ -215,7 +219,7 @@ export default function Contact() {
               </div>
             )}
 
-            {/* Idea textarea */}
+            {/* ✅ Idea */}
             <div className="flex flex-col">
               <label className="mb-1">
                 Idea <span className="text-red-500">*</span>
@@ -228,8 +232,8 @@ export default function Contact() {
                 value={formData.idea}
                 onChange={handleChange}
                 className={`p-3 rounded-md bg-white/10 border ${
-                  errors.idea ? "border-red-500" : "border-gray-500"
-                } text-white focus:outline-none focus:border-blue-500`}
+                  errors.idea ? "border-red-500" : "border-yellow-400/20"
+                } text-white focus:outline-none focus:border-yellow-400/60`}
               />
 
               {errors.idea && (
@@ -237,7 +241,7 @@ export default function Contact() {
               )}
             </div>
 
-            {/* Status message */}
+            {/* ✅ Status */}
             {status && (
               <p
                 className={`text-sm ${
@@ -245,7 +249,7 @@ export default function Contact() {
                     ? "text-green-400"
                     : status === "error"
                     ? "text-red-400"
-                    : "text-yellow-400"
+                    : "text-yellow-300"
                 }`}
               >
                 {status === "sending"
@@ -256,21 +260,18 @@ export default function Contact() {
               </p>
             )}
 
-            {/* Submit button */}
+            {/* ✅ Submit Button (GOLD) */}
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.95 }}
               disabled={status === "sending"}
               type="submit"
               className="
-                bg-blue-600 
-                hover:bg-blue-700 
-                disabled:opacity-60 
-                text-white 
-                py-3 
-                rounded-md 
-                font-semibold 
-                transition
+                disabled:opacity-60
+                text-black py-3 rounded-md font-semibold transition
+                bg-gradient-to-r from-[#ffb000] via-[#ff9f1a] to-[#ffd36a]
+                shadow-[0_0_22px_rgba(255,176,0,0.35)]
+                hover:shadow-[0_0_35px_rgba(255,176,0,0.65)]
               "
             >
               {status === "sending" ? "Sending..." : "Send Message"}

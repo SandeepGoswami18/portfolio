@@ -39,11 +39,11 @@ export default function Projects() {
     () => [
       {
         title: "Music Studio",
-        bgColor:"#2A0B1E",
+        bgColor: "#2A0B1E",
         image: isMobile ? photo1 : img1,
       },
       {
-        title: "Simple E-commerce ",
+        title: "E-commerce",
         bgColor: "#3884d3",
         image: isMobile ? photo2 : img2,
       },
@@ -96,11 +96,11 @@ export default function Projects() {
     >
       {/* Sticky container keeps content fixed while scrolling */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
-        {/* Section Title */}
+        {/* ✅ Section Title (My Work) */}
         <h2
-          className={`text-3xl font-semibold z-10 text-center ${
-            isMobile ? "mt-4" : "mt-8"
-          }`}
+          className="text-4xl sm:text-5xl font-extrabold text-center 
+          bg-clip-text text-transparent 
+          bg-gradient-to-r from-[#ffb000] via-[#ff9f1a] to-[#ffd36a]"
         >
           My Work
         </h2>
@@ -121,7 +121,7 @@ export default function Projects() {
               }`}
               style={{ width: "85%", maxWidth: "1200px" }}
             >
-              {/* Animate project title when switching */}
+              {/* ✅ Animate project title when switching */}
               <AnimatePresence mode="wait">
                 {activeIndex === idx && (
                   <MH3
@@ -130,9 +130,14 @@ export default function Projects() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 30 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
-                    className={`block text-center text-[clamp(2rem,6vw,5rem)] text-white/95 sm:absolute sm:-top-21 sm:left-[35%] lg:left-[-5%] sm:mb-0 font-bangers italic font-semibold ${
-                      isMobile ? "-mt-25" : ""
-                    }`}
+                    className={`block text-center 
+                      text-[clamp(1.6rem,4.6vw,3.5rem)] 
+                      sm:absolute sm:-top-20 sm:left-[35%] lg:left-[-5%]
+                      sm:mb-0 font-bangers italic font-semibold
+                      bg-clip-text text-transparent 
+                      bg-gradient-to-r from-white via-white to-[#ffb000]
+                      drop-shadow-[0_0_14px_rgba(0,0,0,0.55)]
+                      ${isMobile ? "-mt-20" : ""}`}
                     style={{
                       zIndex: 5,
                       textAlign: isMobile ? "center" : "left",
@@ -143,14 +148,14 @@ export default function Projects() {
                 )}
               </AnimatePresence>
 
-              {/* Project Image Wrapper */}
+              {/* ✅ Project Image Wrapper */}
               <div
                 className={`relative w-full overflow-hidden bg-black/20 shadow-2xl md:shadow-[0_35px_60px_-15px_rgba(0,0,0,0.7)] ${
                   isMobile ? "mb-6 rounded-lg" : "mb-10 sm:mb-12 rounded-xl"
                 } h-[62vh] sm:h-[66vh]`}
                 style={{ zIndex: 10, transition: "box-shadow 250ms ease" }}
               >
-                {/* Project Image */}
+                {/* ✅ Project Image */}
                 <img
                   src={project.image}
                   alt={project.title}
@@ -164,7 +169,7 @@ export default function Projects() {
                   loading="lazy"
                 />
 
-                {/* Subtle gradient overlay */}
+                {/* ✅ Subtle gradient overlay */}
                 <div
                   className="pointer-events-none absolute inset-0"
                   style={{
@@ -178,11 +183,15 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* ✅ View Project Button (but NOT working) */}
+        {/* ✅ View Project Button (Soon) */}
         <div className={`absolute ${isMobile ? "bottom-20" : "bottom-10"}`}>
           <button
             onClick={handleViewProject}
-            className="inline-block px-6 py-3 font-semibold rounded-lg bg-white/80 text-black cursor-not-allowed opacity-80 hover:bg-white/80 transition-all"
+            className="
+              inline-block px-6 py-3 font-semibold rounded-lg 
+              bg-white/80 text-black cursor-not-allowed opacity-80 
+              hover:bg-white/80 transition-all
+            "
             aria-label={`View ${activeProject?.title}`}
           >
             View Project (Soon)

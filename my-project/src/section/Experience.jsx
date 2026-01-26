@@ -161,9 +161,10 @@ const Experience = () => {
         <div className="sticky top-0 h-screen flex flex-col">
           {/* Section Title */}
           <div className="shrink-0 px-6 pt-8">
-            <h2 className="text-4xl sm:text-5xl font-semibold mt-5 text-center">
-              Experience
-            </h2>
+            <h2 className="text-4xl sm:text-5xl font-extrabold mt-5 text-center 
+bg-clip-text text-transparent bg-gradient-to-r from-[#ffb000] via-[#ffd36a] to-[#fff1c1]">
+  Experience
+</h2>
           </div>
 
           {/* Timeline container */}
@@ -172,10 +173,13 @@ const Experience = () => {
             <div className="relative w-full max-w-7xl hidden md:block">
               {/* Horizontal timeline line */}
               <div className="relative h-[6px] bg-white/15 rounded">
-                <motion.div
-                  className="absolute left-0 top-0 h-[6px] bg-white rounded origin-left"
-                  style={{ width: lineWidth }}
-                />
+                <div className="relative h-[6px] bg-white/10 rounded">
+  <motion.div
+    className="absolute left-0 top-0 h-[6px] rounded origin-left
+    bg-gradient-to-r from-[#ffb000] via-[#ff9f1a] to-[#ffd36a]"
+    style={{ width: lineWidth }}
+  />
+</div>
               </div>
 
               {/* Experience items mapped for desktop */}
@@ -202,10 +206,14 @@ const Experience = () => {
             <div className="relative w-full max-w-md md:hidden">
               {/* Vertical timeline line */}
               <div className="absolute left-0 top-0 bottom-0 w-[6px] bg-white/15 rounded">
-                <motion.div
-                  className="absolute top-0 left-0 w-[6px] bg-white rounded origin-top"
-                  style={{ height: lineHeight }}
-                />
+                <div className="absolute left-0 top-0 bottom-0 w-[6px] bg-white/10 rounded">
+  <motion.div
+    className="absolute top-0 left-0 w-[6px] rounded origin-top
+    bg-gradient-to-b from-[#ffb000] via-[#ff9f1a] to-[#ffd36a]"
+    style={{ height: lineHeight }}
+  />
+</div>
+
               </div>
 
               {/* Experience items mapped for mobile */}
