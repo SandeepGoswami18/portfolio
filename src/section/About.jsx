@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import p from "../assets/p.jpg";
 
 export default function About() {
   const stats = [
@@ -50,8 +49,9 @@ export default function About() {
             }}
             viewport={{ once: true }}
           >
+            {/* ✅ Public image (assets removed) */}
             <img
-              src={p}
+              src="/p.jpg"
               alt="profile"
               className="absolute inset-0 w-full h-full object-cover"
             />

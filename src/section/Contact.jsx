@@ -10,8 +10,13 @@ import emailjs from "@emailjs/browser";
 // Importing Particles Background (same as Home component)
 import ParticlesBackground from "../components/ParticleBackground.jsx";
 
+<<<<<<< HEAD
 // Importing the contact image asset
 import Astra from "../assets/Astra.png";
+=======
+// ✅ REMOVE assets import (assets folder deleted)
+// import Astra from "../assets/Astra.png";
+>>>>>>> 12c0f15 (fixed images + deployed ready)
 
 // Reading EmailJS credentials from environment variables (Vite)
 const SERVICE_ID = import.meta.env.VITE_SERVICE_ID;
@@ -48,7 +53,16 @@ export default function Contact() {
       (f) => !formData[f].trim() && (newErrors[f] = "Fill this field")
     );
 
+<<<<<<< HEAD
     if (formData.service !== "other" && !formData.budget.trim())
+=======
+    // ✅ budget only when service selected
+    if (
+      formData.service &&
+      formData.service !== "Others" &&
+      !formData.budget.trim()
+    )
+>>>>>>> 12c0f15 (fixed images + deployed ready)
       newErrors.budget = "Fill this field";
 
     setErrors(newErrors);
@@ -100,7 +114,8 @@ export default function Contact() {
           className="w-full md:w-1/2 flex justify-center"
         >
           <motion.img
-            src={Astra}
+            // ✅ Public folder image
+            src="/Astra.png"
             alt="Contact"
             className="w-72 md:w-140 rounded-2xl shadow-lg object-cover"
             animate={{ y: [0, -10, 0] }}
@@ -153,9 +168,7 @@ export default function Contact() {
                   errors.email ? "border-red-500" : "border-gray-500"
                 } text-white focus:outline-none focus:border-blue-500`}
               />
-              {errors.email && (
-                <p className="text-red-500 text-xs">{errors.email}</p>
-              )}
+              {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
             </div>
 
             {/* Service dropdown */}

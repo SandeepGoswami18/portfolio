@@ -1,13 +1,15 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 
-import img1 from "../assets/img1.JPG";
-import img2 from "../assets/img2.JPG";
-import img3 from "../assets/img3.JPG";
+// Importing project images (desktop & mobile versions)
+const img1 = "/img1.jpg";
+const img2 = "/img2.jpg";
+const img3 = "/img3.jpg";
 
-import photo1 from "../assets/img1.JPG";
-import photo2 from "../assets/photo2.PNG";
-import photo3 from "../assets/photo3.png";
+const photo1 = "/av.png";
+const photo2 = "/photo2.png";
+const photo3 = "/photo3.png";
+
 
 const useIsMobile = (query = "(max-width: 639px)") => {
   const [isMobile, setIsMobile] = useState(

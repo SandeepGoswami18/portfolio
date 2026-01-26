@@ -2,7 +2,9 @@ import React, { useMemo, useEffect, useState } from "react";
 import ParticlesBackground from "../components/ParticleBackground";
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
-import avator from "../assets/avator.png";
+
+// ✅ REMOVE assets import (because assets folder deleted)
+// import avator from "../assets/avator.png";
 
 const socials = [
   { Icon: FaXTwitter, label: "X", href: "https://x.com/home" },
@@ -198,10 +200,28 @@ export default function Home() {
               width: "min(45vw, 780px)",
               maxHeight: "90vh",
             }}
+<<<<<<< HEAD
             initial={{ opacity: 0, y: 40, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 0.8, duration: 1 }}
           />
+=======
+          >
+            {/* border ring */}
+            <div className="absolute inset-0 rounded-full border border-[#ffb000]/40 shadow-[0_0_30px_rgba(255,176,0,0.25)]" />
+
+            {/* ✅ avatar from PUBLIC */}
+            <motion.img
+              src="/avator.png"
+              alt="Sandeep Kumar"
+              className="w-[270px] h-[270px] rounded-full object-cover select-none"
+              whileHover={{
+                filter:
+                  "drop-shadow(0 0 18px rgba(255,176,0,0.75)) drop-shadow(0 0 40px rgba(255,159,26,0.55))",
+              }}
+            />
+          </motion.div>
+>>>>>>> 12c0f15 (fixed images + deployed ready)
         </motion.div>
       </div>
     </section>
